@@ -1,50 +1,54 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider";
+// import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
-  //   const { createUser, updateUser } = useContext(AuthContext);
-  //   const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const { createUser, updateUser } = useContext(AuthContext);
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
   //   const [token] = useToken(createdUserEmail);
-  //   const {
-  //     register,
-  //     formState: { error },
-  //     handleSubmit,
-  //   } = useForm();
-  //   const navigate = useNavigate();
+  const {
+    register,
+    formState: { error },
+    handleSubmit,
+  } = useForm();
+  const navigate = useNavigate();
 
   //   if (token) {
   //     navigate("/");
   //   }
 
-  //   const handleSignup = (data) => {
-  //     // console.log(data);
-  //     // console.log(data.email, data.password, data.role);
-  //     createUser(data.email, data.password)
-  //       .then((userCredential) => {
-  //         // Signed in
-  //         const user = userCredential.user;
-  //         // console.log(user);
-  //         const userInfo = {
-  //           displayName: data.name,
-  //         };
-  //         updateUser(userInfo)
-  //           .then(() => {
-  //             toast.success("Registration Successfull");
-  //             saveUsersInDatabase(data.name, data.email, data.role);
-  //           })
-  //           .catch((err) => {
-  //             console.log(err);
-  //           });
+  const handleSignup = (data) => {
+    // console.log(data);
+    // console.log(data.email, data.password, data.role);
+    createUser(data.email, data.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // console.log(user);
+        const userInfo = {
+          displayName: data.name,
+        };
+        updateUser(userInfo)
+          .then(() => {
+            toast.success("Registration Successfull");
+            // saveUsersInDatabase(data.name, data.email, data.role);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
 
-  //         // ...
-  //       })
-  //       .catch((error) => {
-  //         const errorCode = error.code;
-  //         const errorMessage = error.message;
-  //         console.log(errorMessage);
-  //         // ..
-  //       });
-  //   };
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        // ..
+      });
+  };
 
   //   const saveUsersInDatabase = (name, email, role) => {
   //     const user = { name: name, email: email, role: role };
@@ -78,7 +82,7 @@ const SignUp = () => {
               <h1 className=" text-center text-blue-700 font-bold text-3xl mb-6">
                 Please Register
               </h1>
-              <form>
+              <form onSubmit={handleSubmit(handleSignup)}>
                 <div className="mb-4">
                   <label
                     className=" flex justify-start text-lg mb-2"
@@ -88,7 +92,7 @@ const SignUp = () => {
                   </label>
                   <input
                     type="text"
-                    // {...register("name", { required: "Name is Required" })}
+                    {...register("name", { required: "Name is Required" })}
                     className="form-control block w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Your Name"
                   />
@@ -102,29 +106,13 @@ const SignUp = () => {
                   </label>
                   <input
                     type="email"
-                    // {...register("email", {
-                    //   required: "Email Address is required",
-                    // })}
+                    {...register("email", {
+                      required: "Email Address is required",
+                    })}
                     className="form-control block w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Email address"
                   />
                 </div>
-                <label
-                  className=" flex justify-start text-lg mb-2"
-                  htmlFor="name"
-                >
-                  What type of User You are ?
-                </label>
-                <select
-                  //   {...register("role", {
-                  //     required: "Password is Required",
-                  //   })}
-                  id=""
-                  className=" mb-4 w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                >
-                  <option value="buyer">Buyer</option>
-                  <option value="seller">Seller</option>
-                </select>
                 <div className="mb-6">
                   <label
                     className=" flex justify-start text-lg mb-2"
@@ -134,7 +122,7 @@ const SignUp = () => {
                   </label>
                   <input
                     type="password"
-                    // {...register("password")}
+                    {...register("password")}
                     className="form-control block w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Password"
                   />

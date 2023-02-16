@@ -1,42 +1,42 @@
-import React from "react";
-import { Link } from "react-router-dom";
+// import { GoogleAuthProvider } from "firebase/auth";
+import React, { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 const Login = () => {
-  //   const { signInUser, googleLogin, user } = useContext(AuthContext);
-  //   const [loginError, setLoginError] = useState("");
-  //   const [loginUserEmail, setLoginUserEmail] = useState("");
-  //   const [token] = useToken(loginUserEmail);
-  //   const {
-  //     register,
-  //     formState: { error },
-  //     handleSubmit,
-  //   } = useForm();
-  //   const navigate = useNavigate();
-  //   const location = useLocation();
-  //   const from = location.state?.pathname || "/";
+  const { signInUser, user } = useContext(AuthContext);
+  const [loginError, setLoginError] = useState("");
+  const [loginUserEmail, setLoginUserEmail] = useState("");
+  const {
+    register,
+    formState: { error },
+    handleSubmit,
+  } = useForm();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.pathname || "/";
 
-  //   if (token) {
-  //     navigate(from, { replace: true });
-  //   }
-  //   if (user) {
-  //     navigate(from, { replace: true });
-  //   }
+  if (user) {
+    navigate(from, { replace: true });
+  }
 
-  //   const handleLogin = (data) => {
-  //     setLoginError("");
-  //     signInUser(data.email, data.password)
-  //       .then((result) => {
-  //         const user = result.user;
-  //         // console.log(user);
-  //         setLoginUserEmail(data.email);
-  //         toast.success("Successfully Login");
-  //       })
-  //       .catch((error) => {
-  //         console.log(error.message);
-  //         setLoginError(error.message);
-  //         toast.error(error.message);
-  //       });
-  //   };
+  const handleLogin = (data) => {
+    setLoginError("");
+    signInUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        // console.log(user);
+        setLoginUserEmail(data.email);
+        toast.success("Successfully Login");
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setLoginError(error.message);
+        toast.error(error.message);
+      });
+  };
 
   //   const handleGoogleLogin = () => {
   //     setLoginError("");
@@ -45,23 +45,6 @@ const Login = () => {
   //       .then((result) => {
   //         const user = result.user;
   //         // console.log(user);
-  //         const userData = {
-  //           name: user.displayName,
-  //           email: user.email,
-  //           role: "buyer",
-  //         };
-
-  //         fetch("https://purana-phone-server.vercel.app/adduser", {
-  //           method: "POST",
-  //           headers: {
-  //             "content-type": "application/json",
-  //           },
-  //           body: JSON.stringify(userData),
-  //         })
-  //           .then((res) => res.json())
-  //           .then((data) => {
-  //             // console.log(data);
-  //           });
   //         toast.success("Successfully Login");
   //       })
   //       .catch((error) => {
@@ -88,9 +71,9 @@ const Login = () => {
                 Please Login
               </h1>
               <p className="text-center text-red-700 font-semibold ">
-                {/* {loginError} */}
+                {loginError}
               </p>
-              <form>
+              <form onSubmit={handleSubmit(handleLogin)}>
                 <div className="mb-6">
                   <label
                     className=" flex justify-start text-lg mb-2"
@@ -100,7 +83,7 @@ const Login = () => {
                   </label>
                   <input
                     type="email"
-                    // {...register("email")}
+                    {...register("email")}
                     name="email"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Email address"
@@ -116,7 +99,7 @@ const Login = () => {
                   </label>
                   <input
                     type="password"
-                    // {...register("password")}
+                    {...register("password")}
                     name="password"
                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Password"

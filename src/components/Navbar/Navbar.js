@@ -44,6 +44,7 @@ const Navbar = () => {
           </label>
           <Link to="/" className="inline-flex items-center">
             {/* <img src={logo} alt="" className=" h-10" /> */}
+            <p className=" text-2xl text-yellow-300 font-extrabold">ONLI-KAJ</p>
           </Link>
           <ul className="flex items-center hidden space-x-8 lg:flex text-white font-medium">
             {listItems}
