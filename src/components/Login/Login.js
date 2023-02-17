@@ -79,7 +79,7 @@ const Login = () => {
                     className=" flex justify-start text-lg mb-2"
                     htmlFor="email"
                   >
-                    Password
+                    Email
                   </label>
                   <input
                     type="email"

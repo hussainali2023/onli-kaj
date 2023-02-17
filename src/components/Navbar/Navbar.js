@@ -28,6 +28,12 @@ const Navbar = () => {
       <li>
         <Link to="/contact">Contact Us</Link>
       </li>
+      <li>
+        <button className="inline-flex items-center justify-center w-full h-12 px-6 tracking-wide text-white transition duration-200 rounded shadow-md bg-green-500 hover:bg-green-700">
+          Post a Job
+        </button>
+      </li>
+
       {user?.uid ? (
         <>
           <li>
@@ -54,7 +60,7 @@ const Navbar = () => {
     </React.Fragment>
   );
   return (
-    <div className="bg-blue-500">
+    <div className=" bg-sky-300">
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className="relative flex items-center justify-between">
           <label
@@ -78,7 +84,7 @@ const Navbar = () => {
           </label>
           <Link to="/" className="inline-flex items-center">
             {/* <img src={logo} alt="" className=" h-10" /> */}
-            <p className=" text-2xl text-yellow-300 font-extrabold">ONLI-KAJ</p>
+            <p className=" text-2xl text-yellow-200 font-extrabold">ONLI-KAJ</p>
           </Link>
           <ul className="flex items-center hidden space-x-8 lg:flex text-white font-medium">
             {listItems}
