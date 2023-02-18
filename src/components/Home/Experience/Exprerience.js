@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
 const Exprerience = () => {
-  const { data: jobs, isLoading } = useQuery({
-    queryKey: ["job"],
+  const { data: expJobs, isLoading } = useQuery({
+    queryKey: ["expJob"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/fresher");
+      const res = await fetch("http://localhost:5000/experienced");
       const data = await res.json();
       return data;
     },
@@ -13,15 +13,15 @@ const Exprerience = () => {
   if (isLoading) {
     return <p>Loading......</p>;
   }
-  console.log(jobs);
+  console.log(expJobs);
   return (
     <div className="  ">
       <p className="bg-sky-200 text-center text-3xl font-semibold">
         Experienced Job
       </p>
       <div>
-        {jobs.map((job) => (
-          <div key={job._id} className=" px-4 bg-slate-400 mt-4">
+        {expJobs.map((expJob) => (
+          <div key={expJob._id} className=" px-4 bg-slate-400 mt-4">
             <div className="row">
               <div className="col-lg-12 col-md-12">
                 <div className="single_jobs white-bg flex justify-between">
@@ -31,19 +31,19 @@ const Exprerience = () => {
                     </div>
                     <div className="jobs_conetent">
                       <a href="job_details.html">
-                        <h4 className=" text-2xl">{job.company_name}</h4>
+                        <h4 className=" text-2xl">{expJob.company_name}</h4>
                       </a>
 
                       <p className=" font-semibold">
-                        Position: {job.position_name}
+                        Position: {expJob.position_name}
                       </p>
-                      <p>Job Type: {job.job_type}</p>
+                      <p>Job Type: {expJob.job_type}</p>
                       <div className="links_locat flex items-center">
                         <div className="location">
                           <p>
                             {" "}
                             <i className="fa fa-map-marker"></i> Location:{" "}
-                            {job.job_location}
+                            {expJob.job_location}
                             &nbsp;
                           </p>
                         </div>
@@ -64,7 +64,7 @@ const Exprerience = () => {
                       </a>
                     </div>
                     <div className="date mt-4">
-                      <p>Date line: 31 Jan 2020</p>
+                      <p>Date line: {expJob.post_date}</p>
                     </div>
                   </div>
                 </div>

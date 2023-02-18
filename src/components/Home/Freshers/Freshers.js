@@ -64,7 +64,7 @@ const Freshers = () => {
                       </a>
                     </div>
                     <div className="date mt-4">
-                      <p>Date line: 31 Jan 2020</p>
+                      <p>Date line: {job.post_date}</p>
                     </div>
                   </div>
                 </div>
