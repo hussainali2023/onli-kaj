@@ -5,7 +5,7 @@ const Exprerience = () => {
   const { data: expJobs, isLoading } = useQuery({
     queryKey: ["expJob"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/experienced");
+      const res = await fetch("https://onli-kaj-server.vercel.app/experienced");
       const data = await res.json();
       return data;
     },

@@ -60,7 +60,7 @@ const Navbar = () => {
     </React.Fragment>
   );
   return (
-    <div className=" bg-sky-300">
+    <div className=" bg-sky-500">
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className="relative flex items-center justify-between">
           <label

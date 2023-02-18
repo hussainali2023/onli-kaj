@@ -5,7 +5,7 @@ const Freshers = () => {
   const { data: jobs, isLoading } = useQuery({
     queryKey: ["job"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/fresher");
+      const res = await fetch("https://onli-kaj-server.vercel.app/fresher");
       const data = await res.json();
       return data;
     },
